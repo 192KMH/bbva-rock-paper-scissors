@@ -1,7 +1,3 @@
-## Automatic deployment
-
-Deploys automatically with every commit at: https://kmh-bbva-rps.netlify.app/
-
 ## Available Scripts
 
 In the project directory, you can run:
