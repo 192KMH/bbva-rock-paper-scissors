@@ -7,7 +7,6 @@ import logout from "../sign-out.png"
 
 const Game = () => {
   const { state } = useLocation()
-  //if (state === null) return //failsafe, redirect to login
   const { id } = state
   const navigate = useNavigate()
   const user = id
@@ -25,13 +24,9 @@ const Game = () => {
     setCpuOption(computerChoice())
   }, [pts])
 
-  const navigation = (dest) => {
+  const navigation = () => {
     saveScore(user, pts)
-    if (dest === "logout") {
-      navigate("/")
-    } else {
-      navigate("/ranking")
-    }
+    navigate("/")
   }
 
   const gameStart = (userChoice) => {
@@ -57,9 +52,8 @@ const Game = () => {
             src={logout}
             className="logout"
             alt="logout"
-            onClick={() => navigation("logout")}
+            onClick={() => navigation()}
           ></img>
-          {/* <a onClick={() => navigation("ranking")}>Ranking</a> */}
         </div>
       </div>
       {disable && (

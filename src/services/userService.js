@@ -1,46 +1,40 @@
+const STORAGE_KEY = "bbva-rps"
+
 export function newUser(user) {
-  let createUser = {
+  const createUser = {
     user: user,
     score: 0,
   }
-  let usersArr = []
-  if (!localStorage.getItem("bbva-rps")) {
-    usersArr.push(createUser)
-    localStorage.setItem("bbva-rps", JSON.stringify(usersArr))
-  } else {
-    usersArr = JSON.parse(localStorage.getItem("bbva-rps"))
-    usersArr.push(createUser)
-    localStorage.setItem("bbva-rps", JSON.stringify(usersArr))
-  }
+
+  const users = localStorage.getItem(STORAGE_KEY)
+  const usersArr = users ? JSON.parse(users) : []
+  usersArr.push(createUser)
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(usersArr))
 }
 
 export function getScore(user) {
-  let usersArr = []
-  usersArr = JSON.parse(localStorage.getItem("bbva-rps"))
-  let foundUser = usersArr.find((item) => item.user === user)
-  return foundUser.score
+  const usersArr = JSON.parse(localStorage.getItem(STORAGE_KEY))
+  const foundUser = usersArr.find((item) => item.user === user)
+  return foundUser ? foundUser.score : 0
 }
 
 export function saveScore(user, pts) {
-  let usersArr = []
-  usersArr = JSON.parse(localStorage.getItem("bbva-rps"))
-  let foundUser = usersArr.find((item) => item.user === user)
-  foundUser.score = pts
-  localStorage.setItem("bbva-rps", JSON.stringify(usersArr))
+  const usersArr = JSON.parse(localStorage.getItem(STORAGE_KEY))
+  const foundUser = usersArr.find((item) => item.user === user)
+  if (foundUser) {
+    foundUser.score = pts
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(usersArr))
+  }
 }
 
 export function checkUser(user) {
-  let userExists = false
-  if (!localStorage.getItem("bbva-rps")) {
+  const users = localStorage.getItem(STORAGE_KEY)
+  if (!users) {
     newUser(user)
   } else {
-    for (let i of JSON.parse(localStorage.getItem("bbva-rps"))) {
-      if (i.user === user) {
-        userExists = true
-        break
-      }
-    }
-    if (!userExists) {
+    const usersArr = JSON.parse(users)
+    const foundUser = usersArr.find((item) => item.user === user)
+    if (!foundUser) {
       newUser(user)
     }
   }
