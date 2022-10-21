@@ -11,7 +11,7 @@ const Login = () => {
     if (userValidation.length > 0) {
       navigate("/game", { state: { id: userValidation } })
     }
-  }, [userValidation])
+  }, [userValidation, navigate])
 
   const handleSubmit = (event) => {
     event.preventDefault()
