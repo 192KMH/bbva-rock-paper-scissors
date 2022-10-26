@@ -1,4 +1,6 @@
-## Based on [https://bbvaengineering.github.io/challenges/rock-paper-scissors](this coding test)
+##  
+
+Based on [https://bbvaengineering.github.io/challenges/rock-paper-scissors](this coding test)
 
 The app is automatically deployed with each commit.
 Check it out --> http://kmh-bbva-rps.netlify.app/
